@@ -14,7 +14,7 @@ def pseudo_rand_num(size):
 
 def count_first_digit(lst):
     count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
     for n in lst:
         n_str = str(n)
@@ -26,12 +26,10 @@ def count_first_digit(lst):
 
 def show_bar_graph(num, count):
     fig = plt.figure()
-    ax = fig.add_axes([0, 0, 1, 1])
-    ax.bar(num, count)
+    plt.bar(num, count)
 
-    #TODO: x and y axis does not show up
-    ax.set_title("Testing Benford's Law Hypothesis")
-    ax.set_ylabel("First Digit counts")
+    plt.title('Testing Benford\'s Law Hypothesis')
+    plt.ylabel('First Digit counts')
     plt.show()
 
 
