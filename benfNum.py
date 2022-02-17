@@ -17,12 +17,12 @@ def pseudo_rand_num(size):
 def read_csv(filename):
     file = open(filename)
     csvreader = csv.reader(file)
-    header = next(csvreader)
+    header = next(csvreader)[0]
     lst = []
     for row in csvreader:
         for item in row:
             lst.append(item)
-    return lst
+    return header, lst
 
 
 def count_first_digit(lst):
@@ -37,22 +37,27 @@ def count_first_digit(lst):
     return numbers, count
 
 
-def show_bar_graph(num, count):
+def show_bar_graph(num, count, title='Testing Benford\'s Law Hypothesis'):
     fig = plt.figure()
     plt.bar(num, count)
 
-    plt.title('Testing Benford\'s Law Hypothesis')
+    plt.title(title)
     plt.ylabel('First Digit counts')
     plt.show()
 
 
 if __name__ == "__main__":
-    #generating pseudo random numbers
+    # generating pseudo random numbers
     lst = pseudo_rand_num(100)
     numbers, count = count_first_digit(lst)
     show_bar_graph(numbers, count)
 
-    #reading and graphing random numbers generated from RANDOM.ORG
-    lst = read_csv("./data/random.org-numbers.csv")
+    # reading and graphing random numbers generated from RANDOM.ORG
+    hdr, lst = read_csv("./data/random.org-numbers.csv")
     numbers, count = count_first_digit(lst)
     show_bar_graph(numbers, count)
+
+    # reading and graphing census 2020 state numbers
+    hdr, lst = read_csv("./data/census2020-numbers.csv")
+    numbers, count = count_first_digit(lst)
+    show_bar_graph(numbers, count, hdr)
